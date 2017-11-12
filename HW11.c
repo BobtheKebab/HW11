@@ -4,24 +4,21 @@
 #include <unistd.h>
 
 char ** parse_args (char * line) {
-  char args[16];
+  char ** args = calloc(10, sizeof(char *));
   int count = 0;
-  while (delim) {
-    if (count = 0) {
-      char * temp = strsep(line, " ");
-      args[0] = temp;
-      args[1] = temp;
-    } else {
-      args[count] = strsep(line, " ");
-    }
+  while (line) {
+    args[count] = strsep(&line, " ");
     count++;
   }
   args[count] = NULL;
+  return args;
 }
 
 int main () {
 
-  char ** args = parse_args("ls");
+  char line[50] = "echo IT WORKS YAY";
+  char ** args = parse_args(line);
   execvp(args[0], args);
+  return 0;
   
 }
